@@ -27,8 +27,15 @@ export default function Navbar({ children }) {
           navbarPushedMobile ? "sf-admin-sidebar-opened" : ""
         }`}
       >
-        <Link to="/stats">Stats</Link>
-        <Link to="/cities">Cities</Link>
+        <Link as="span" to="/stats">
+          Stats
+        </Link>
+        <Link as="span" to="/cities">
+          Cities
+        </Link>
+        <Link as="span" to="/users">
+          Users
+        </Link>
       </div>
       <div className="sf-admin-content">{children}</div>
     </div>

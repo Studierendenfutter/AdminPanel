@@ -8,6 +8,7 @@ import Cities from "./pages/Cities";
 import "semantic-ui-css/semantic.min.css";
 import "./index.css";
 import Stats from "./pages/Stats";
+import Users from "./pages/Users/Users";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,6 +23,9 @@ ReactDOM.render(
           </Route>
           <Route exact path="/cities">
             <Cities />
+          </Route>
+          <Route exact path="/users">
+            <Users />
           </Route>
         </Switch>
       </Navbar>

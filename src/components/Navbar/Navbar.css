@@ -8,7 +8,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5em;
+  padding: 2em;
   background: #094249;
   color: white;
 }
@@ -19,7 +19,7 @@
   height: calc(100vh - 70px);
   width: 150px;
   z-index: 10;
-  padding: 0.5em;
+  padding: 2em;
   padding-top: 50px;
   display: flex;
   flex-direction: column;
@@ -30,8 +30,17 @@
 
 .sf-admin-sidebar a {
   color: white;
+  font-size: 1.3rem;
+  line-height: 1.3em;
+  border: solid white 2px;
+  border-radius: 0.5em;
+  text-align: center;
+  margin-bottom: 1em;
 }
 
+.sf-admin-sidebar a:hover {
+  color: #fffcdc;
+}
 .sf-admin-sidebar-button {
   cursor: pointer;
   opacity: 0 !important;
