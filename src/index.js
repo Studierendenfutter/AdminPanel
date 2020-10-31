@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar";
 import Cities from "./pages/Cities";
+import CityMeals from "./pages/CityMeals";
 
 import "semantic-ui-css/semantic.min.css";
 import "./index.css";
@@ -23,6 +24,9 @@ ReactDOM.render(
           </Route>
           <Route exact path="/cities">
             <Cities />
+          </Route>
+          <Route exact path="/cities/:cityId/meals">
+            <CityMeals />
           </Route>
           <Route exact path="/users">
             <Users />

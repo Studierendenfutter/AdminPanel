@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TableWrapper from "../../components/TableWrapper/TableWrapper";
 import useCities from "../../services/hooks/useCities";
 import { Checkbox, Modal, Icon, Header, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 export default function Cities() {
   const [cities, updateCity] = useCities();
@@ -10,7 +11,7 @@ export default function Cities() {
   return (
     <div>
       <TableWrapper
-        columnNames={["ID", "Name", "On Semester Break"]}
+        columnNames={["ID", "Name", "On Semester Break", "Actions"]}
         content={cities.map((city) => [
           city.id,
           city.city,
@@ -24,6 +25,9 @@ export default function Cities() {
               });
             }}
           />,
+          <Link to={`/cities/${city.id}/meals`}>
+            <Icon name="food" />
+          </Link>,
         ])}
       />
 
