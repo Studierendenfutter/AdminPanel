@@ -8,7 +8,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 2em;
+  padding: 1.5em;
   background: #094249;
   color: white;
 }
@@ -19,7 +19,7 @@
   height: calc(100vh - 70px);
   width: 150px;
   z-index: 10;
-  padding: 2em;
+  padding: 1.5em;
   padding-top: 50px;
   display: flex;
   flex-direction: column;

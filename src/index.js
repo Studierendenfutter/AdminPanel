@@ -10,6 +10,8 @@ import "semantic-ui-css/semantic.min.css";
 import "./index.css";
 import Stats from "./pages/Stats";
 import Users from "./pages/Users/Users";
+import Canteens from "./pages/Canteens";
+import CanteenMeals from "./pages/CanteenMeals";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,6 +23,12 @@ ReactDOM.render(
           </Route>
           <Route exact path="/stats">
             <Stats />
+          </Route>
+          <Route exact path="/canteens">
+            <Canteens />
+          </Route>
+          <Route exact path="/canteens/:canteenId/meals">
+            <CanteenMeals />
           </Route>
           <Route exact path="/cities">
             <Cities />

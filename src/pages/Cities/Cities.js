@@ -25,9 +25,12 @@ export default function Cities() {
               });
             }}
           />,
-          <Link to={`/cities/${city.id}/meals`}>
-            <Icon name="food" />
-          </Link>,
+          <Button
+            as={Link}
+            to={`/cities/${city.id}/meals`}
+            icon="food"
+            primary
+          ></Button>,
         ])}
       />
 
