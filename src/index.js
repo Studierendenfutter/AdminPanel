@@ -12,6 +12,8 @@ import Stats from "./pages/Stats";
 import Users from "./pages/Users/Users";
 import Canteens from "./pages/Canteens";
 import CanteenMeals from "./pages/CanteenMeals";
+import CreateMeal from "./pages/Meal/Create/CreateMeal";
+import PatchMeal from "./pages/Meal/Patch/PatchMeal";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -35,6 +37,12 @@ ReactDOM.render(
           </Route>
           <Route exact path="/cities/:cityId/meals">
             <CityMeals />
+          </Route>
+          <Route exact path="/meals/create">
+            <CreateMeal />
+          </Route>
+          <Route exact path="/meals/:mealId">
+            <PatchMeal />
           </Route>
           <Route exact path="/users">
             <Users />

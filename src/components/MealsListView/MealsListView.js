@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "semantic-ui-react";
 import TableWrapper from "../TableWrapper";
 
 export default function MealsListView({ meals }) {
@@ -8,7 +10,15 @@ export default function MealsListView({ meals }) {
 
   return (
     <TableWrapper
-      columnNames={["Id", "Canteen", "Meal Name", "Prices", "Types", "Date"]}
+      columnNames={[
+        "Id",
+        "Canteen",
+        "Meal Name",
+        "Prices",
+        "Types",
+        "Date",
+        "Action",
+      ]}
       content={meals.reduce(
         (all, canteen) =>
           all.concat(
@@ -25,6 +35,12 @@ export default function MealsListView({ meals }) {
                 />
               )),
               meal.date,
+              <Button
+                as={Link}
+                to={`/meals/${meal.id}`}
+                icon="edit"
+                primary
+              ></Button>,
             ])
           ),
         []
