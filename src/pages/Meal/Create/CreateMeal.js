@@ -1,21 +1,32 @@
 import React, { useState } from "react";
-import { Button } from "semantic-ui-react";
+import { useHistory } from "react-router";
+import { Button, Header } from "semantic-ui-react";
 import MealForm from "../../../components/MealForm/MealForm";
 import getDateString from "../../../services/utils/getDateString";
+import postMeal from "../../../services/backend/postMeal";
 
 export default function CreateMeal() {
+  const history = useHistory();
   const [meal, setMeal] = useState({
-    canteenId: 0,
+    canteen_id: 0,
     name: "",
-    price: "",
     date: getDateString(),
   });
 
+  console.log(meal);
+  const createMeal = async () => {
+    console.log(meal);
+    const _meal = await postMeal(meal);
+    console.log(_meal);
+    history.push("/meals/" + _meal.id);
+  };
+
   return (
     <div>
+      <Header>Create Meal</Header>
       <MealForm meal={meal} setMeal={setMeal} />
       <br />
-      <Button icon="send" positive>
+      <Button icon="send" positive onClick={createMeal}>
         Create
       </Button>
     </div>

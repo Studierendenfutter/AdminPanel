@@ -7,13 +7,13 @@ export default function TableWrapper({ columnNames = [], content = [] }) {
       <Table.Header>
         <Table.Row>
           {columnNames.map((cn) => (
-            <Table.HeaderCell>{cn}</Table.HeaderCell>
+            <Table.HeaderCell key={cn}>{cn}</Table.HeaderCell>
           ))}
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {content.map((row) => (
-          <Table.Row>
+          <Table.Row key={row[0]}>
             {row.map((cell) => (
               <Table.Cell>{cell}</Table.Cell>
             ))}

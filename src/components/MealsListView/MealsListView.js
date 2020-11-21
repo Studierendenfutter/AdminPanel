@@ -9,42 +9,51 @@ export default function MealsListView({ meals }) {
   }
 
   return (
-    <TableWrapper
-      columnNames={[
-        "Id",
-        "Canteen",
-        "Meal Name",
-        "Prices",
-        "Types",
-        "Date",
-        "Action",
-      ]}
-      content={meals.reduce(
-        (all, canteen) =>
-          all.concat(
-            canteen.meals.map((meal) => [
-              meal.id,
-              canteen.name,
-              meal.name,
-              meal.prices.map((price) => <span>{price.price}/</span>),
-              meal.types.map((type) => (
-                <img
-                  style={{ height: "15px" }}
-                  alt={type.name}
-                  src={type.icon_url}
-                />
-              )),
-              meal.date,
-              <Button
-                as={Link}
-                to={`/meals/${meal.id}`}
-                icon="edit"
-                primary
-              ></Button>,
-            ])
-          ),
-        []
-      )}
-    />
+    <div>
+      <Button
+        icon="add"
+        as={Link}
+        to={"/meals/create"}
+        positive
+        content="Add Meal"
+      />
+      <TableWrapper
+        columnNames={[
+          "Id",
+          "Canteen",
+          "Meal Name",
+          "Prices",
+          "Types",
+          "Date",
+          "Action",
+        ]}
+        content={meals.reduce(
+          (all, canteen) =>
+            all.concat(
+              canteen.meals.map((meal) => [
+                meal.id,
+                canteen.name,
+                meal.name,
+                meal.prices.map((price) => <span>{price.price}/</span>),
+                meal.types.map((type) => (
+                  <img
+                    style={{ height: "15px" }}
+                    alt={type.name}
+                    src={type.icon_url}
+                  />
+                )),
+                meal.date,
+                <Button
+                  as={Link}
+                  to={`/meals/${meal.id}`}
+                  icon="edit"
+                  primary
+                ></Button>,
+              ])
+            ),
+          []
+        )}
+      />
+    </div>
   );
 }

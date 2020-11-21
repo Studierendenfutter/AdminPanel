@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import getCanteens from "../backend/getCanteens";
 
-export default function useCanteens(filter) {
-  const [canteens, setCanteens] = useState();
+export default function useCanteens(filter = {}) {
+  const [canteens, setCanteens] = useState([]);
 
   useEffect(() => {
     async function fetch() {
