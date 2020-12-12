@@ -12,7 +12,7 @@ import useMealTypes from "../../../services/hooks/useMealTypes";
 export default function PatchMeal() {
   const { mealId } = useParams();
   const mealPriceTemplate = {
-    price: "3.00",
+    price: "4.00",
     meal_id: mealId,
     user_category_id: 0,
   };
