@@ -20,6 +20,12 @@ export default function Stats() {
     return null;
   }
 
+  const xLabels = data
+    ? data.emailsOpenedDaily.map((eod) =>
+      getDateString(new Date(eod.date))
+    )
+    : []
+
   return (
     <div>
       <h1 className="sf-stats-title">Admin Panel</h1>
@@ -65,11 +71,7 @@ export default function Stats() {
               id: "sf-email-chart",
             },
             xaxis: {
-              categories: data
-                ? data.emailsSendDaily.map((eod) =>
-                    getDateString(new Date(eod.date))
-                  )
-                : [],
+              categories: xLabels
             },
           }}
           series={[
@@ -79,7 +81,13 @@ export default function Stats() {
             },
             {
               name: "emails send",
-              data: data ? data.emailsSendDaily.map((eod) => eod.count) : [],
+              data: data ? data.emailsSendDaily.reduce(
+                (all, eod) => {
+                  console.log(all, eod)
+                  if (xLabels.includes(getDateString(new Date(eod.date))))
+                    return all.concat(eod.count)
+                  return all
+                }, []) : [],
             },
           ]}
           type="line"
