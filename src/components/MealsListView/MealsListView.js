@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
+import sendTestMail from "../../services/backend/sendTestMail";
 import TableWrapper from "../TableWrapper";
 
 export default function MealsListView({ meals }) {
@@ -15,8 +16,9 @@ export default function MealsListView({ meals }) {
         as={Link}
         to={"/meals/create"}
         positive
-        content="Add Meal"
+        content="add Meal"
       />
+      <Button onClick={sendTestMail} content="send test mail" icon="send"/>
       <TableWrapper
         columnNames={[
           "Id",
