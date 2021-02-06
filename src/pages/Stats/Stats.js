@@ -45,6 +45,16 @@ export default function Stats() {
           <span>emails opened</span>
         </div>
         <div className="sf-stats-big-number">
+          <span className="sf-stats-big-number-number">{data.lunchletterSend}</span>
+          <span>lunchletter send</span>
+        </div>
+        <div className="sf-stats-big-number">
+          <span className="sf-stats-big-number-number">
+            {data.lunchletterOpened}
+          </span>
+          <span>lunchletter opened</span>
+        </div>
+        <div className="sf-stats-big-number">
           <span className="sf-stats-big-number-number">
             {data.emailsSendToday}
           </span>
