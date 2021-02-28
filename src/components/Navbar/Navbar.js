@@ -42,6 +42,9 @@ export default function Navbar({ children }) {
           <Link as="span" to="/canteens">
             Canteens
           </Link>
+          <Link as="span" to="/mealRecommendations">
+            Meal Tips
+          </Link>
         </div>
       )}
       <div className="sf-admin-content">{children}</div>
