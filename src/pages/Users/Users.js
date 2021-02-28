@@ -7,11 +7,12 @@ export default function Users() {
 
   return (
     <TableWrapper
-      columnNames={["ID", "Email", "Confirmed"]}
+      columnNames={["ID", "Email", "Confirmed", "Deleted On"]}
       content={users.map((user) => [
         user.id,
         user.email,
         "" + !!user.confirmed,
+        user.deleted_at
       ])}
     />
   );
