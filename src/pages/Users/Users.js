@@ -7,12 +7,23 @@ export default function Users() {
 
   return (
     <TableWrapper
-      columnNames={["ID", "Email", "Confirmed", "Deleted On"]}
-      content={users.map((user) => [
+      columnNames={["ID", "Email", "Confirmed", "Created On", "Deleted On"]}
+      content={users.reverse().map((user) => [
         user.id,
         user.email,
         "" + !!user.confirmed,
-        user.deleted_at
+        new Date(Date.parse(user.created_at)).toLocaleDateString("de-DE", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
+        new Date(Date.parse(user.deleted_at)).toLocaleDateString("de-DE", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
       ])}
     />
   );

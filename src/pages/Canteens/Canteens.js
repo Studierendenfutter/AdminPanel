@@ -12,7 +12,7 @@ export default function Canteens() {
   return (
     <TableWrapper
       columnNames={["ID", "Name", "Address", "City", "Type", "Actions"]}
-      content={canteens.map((canteen) => [
+      content={canteens.reverse().map((canteen) => [
         canteen.id,
         canteen.name,
         canteen.address,

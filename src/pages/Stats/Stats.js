@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import fetchStatistics from "../../services/backend/fetchStatistics";
 import Chart from "react-apexcharts";
 import getDateString from "../../services/utils/getDateString";
-
+import formatPrice from "../../services/utils/formatPrice";
 import "./Stats.css";
 
 export default function Stats() {
@@ -21,10 +21,8 @@ export default function Stats() {
   }
 
   const xLabels = data
-    ? data.emailsOpenedDaily.map((eod) =>
-      getDateString(new Date(eod.date))
-    )
-    : []
+    ? data.emailsOpenedDaily.map((eod) => getDateString(new Date(eod.date)))
+    : [];
 
   return (
     <div>
@@ -45,7 +43,9 @@ export default function Stats() {
           <span>emails opened</span>
         </div>
         <div className="sf-stats-big-number">
-          <span className="sf-stats-big-number-number">{data.lunchletterSend}</span>
+          <span className="sf-stats-big-number-number">
+            {data.lunchletterSend}
+          </span>
           <span>lunchletter send</span>
         </div>
         <div className="sf-stats-big-number">
@@ -72,6 +72,12 @@ export default function Stats() {
           </span>
           <span>% opened today</span>
         </div>
+        <div className="sf-stats-big-number">
+          <span className="sf-stats-big-number-number">
+            {formatPrice(data.avgUserLifetime)}
+          </span>
+          <span>avg user lifetime</span>
+        </div>
       </div>
       <div>
         <h2 className="sf-stats-heading">Emails send per day</h2>
@@ -80,8 +86,11 @@ export default function Stats() {
             chart: {
               id: "sf-email-chart",
             },
+            stroke: {
+              curve: "smooth",
+            },
             xaxis: {
-              categories: xLabels
+              categories: xLabels,
             },
           }}
           series={[
@@ -91,13 +100,14 @@ export default function Stats() {
             },
             {
               name: "emails send",
-              data: data ? data.emailsSendDaily.reduce(
-                (all, eod) => {
-                  console.log(all, eod)
-                  if (xLabels.includes(getDateString(new Date(eod.date))))
-                    return all.concat(eod.count)
-                  return all
-                }, []) : [],
+              data: data
+                ? data.emailsSendDaily.reduce((all, eod) => {
+                    console.log(all, eod);
+                    if (xLabels.includes(getDateString(new Date(eod.date))))
+                      return all.concat(eod.count);
+                    return all;
+                  }, [])
+                : [],
             },
           ]}
           type="line"
@@ -106,7 +116,7 @@ export default function Stats() {
         />
       </div>
       <div>
-        <h2 className="sf-stats-heading">New Signups</h2>
+        <h2 className="sf-stats-heading">User Signups/Deletions</h2>
         <Chart
           options={{
             chart: {
@@ -123,7 +133,82 @@ export default function Stats() {
               name: "signups",
               data: data ? data.userSignupsPerMonth.map((us) => us.count) : [],
             },
+            {
+              name: "deletions",
+              data: data
+                ? data.userSignupsPerMonth.map((us) => {
+                    const month = data.userDeletionsPerMonth.find(
+                      (ud) => us.year === ud.year && us.month === ud.month
+                    );
+                    if (month) {
+                      return month.count;
+                    }
+                    return 0;
+                  })
+                : [],
+            },
           ]}
+          type="line"
+          width={"100%"}
+          height={320}
+        />
+      </div>
+      <div>
+        <h2 className="sf-stats-heading">
+          Amount of users that opened x lunchletters over the last seven days
+        </h2>
+        <Chart
+          options={{
+            chart: {
+              id: "sf-user-chart",
+            },
+            xaxis: {
+              categories: [
+                "4 weeks ago",
+                "3 weeks ago",
+                "2 weeks ago",
+                "1 week ago",
+                "This week",
+              ],
+            },
+          }}
+          series={[1, 2, 3, 4, 5, 6].map((id) => ({
+            data: data.cohortAnalysis.map((cohort) => cohort[id]),
+            name: id,
+          }))}
+          type="line"
+          width={"100%"}
+          height={320}
+        />
+      </div>
+      <div>
+        <h2 className="sf-stats-heading">
+          Percentage of users that opened x lunchletters over the last seven
+          days
+        </h2>
+        <Chart
+          options={{
+            chart: {
+              id: "sf-user-chart",
+            },
+            xaxis: {
+              categories: [
+                "4 weeks ago",
+                "3 weeks ago",
+                "2 weeks ago",
+                "1 week ago",
+                "This week",
+              ],
+            },
+          }}
+          series={[1, 2, 3, 4, 5, 6].map((id) => ({
+            data: data.cohortAnalysis.map((cohort) =>
+              cohort.total === 0
+                ? 0
+                : Math.floor((cohort[id] / cohort.total) * 100)
+            ),
+            name: id,
+          }))}
           type="line"
           width={"100%"}
           height={320}
