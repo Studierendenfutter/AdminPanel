@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "semantic-ui-react";
+import { Button, Header, Icon, Modal } from "semantic-ui-react";
 import sendTestMail from "../../services/backend/sendTestMail";
 import TableWrapper from "../TableWrapper";
 
-export default function MealsListView({ meals }) {
+export default function MealsListView({ meals, deleteMeal }) {
+  const [mealToBeDeletedId, setMealToBeDeletedId] = useState(null);
   if (!meals) {
     return null;
   }
@@ -18,7 +19,41 @@ export default function MealsListView({ meals }) {
         positive
         content="add Meal"
       />
-      <Button onClick={sendTestMail} content="send test mail" icon="send"/>
+      <Button onClick={sendTestMail} content="send test mail" icon="send" />
+      <Modal
+        basic
+        onClose={() => setMealToBeDeletedId(null)}
+        open={mealToBeDeletedId}
+        size="small"
+      >
+        <Header icon>You sure?</Header>
+        <Modal.Content>
+          <p>
+            Your action will delete the meal with the ID {mealToBeDeletedId}.
+            Are you sure want to delete this meal?
+          </p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button
+            basic
+            color="red"
+            inverted
+            onClick={() => setMealToBeDeletedId(null)}
+          >
+            <Icon name="remove" /> No
+          </Button>
+          <Button
+            color="green"
+            inverted
+            onClick={() => {
+              deleteMeal(mealToBeDeletedId);
+              setMealToBeDeletedId(null);
+            }}
+          >
+            <Icon name="checkmark" /> Yes
+          </Button>
+        </Modal.Actions>
+      </Modal>
       <TableWrapper
         columnNames={[
           "Id",
@@ -45,12 +80,20 @@ export default function MealsListView({ meals }) {
                   />
                 )),
                 meal.date,
-                <Button
-                  as={Link}
-                  to={`/meals/${meal.id}`}
-                  icon="edit"
-                  primary
-                ></Button>,
+                <div>
+                  <Button
+                    as={Link}
+                    to={`/meals/${meal.id}`}
+                    icon="edit"
+                    primary
+                  />
+                  <Button
+                    icon="delete"
+                    color="red"
+                    basic
+                    onClick={() => setMealToBeDeletedId(meal.id)}
+                  />
+                </div>,
               ])
             ),
           []

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import deleteMeal from "../backend/deleteMeal";
 import fetchCityMeals from "../backend/fetchCityMeals";
 
 export default function useCityMeals(cityId) {
@@ -10,9 +11,14 @@ export default function useCityMeals(cityId) {
     setCityMeals(cityMeals);
   }
 
+  async function deleteCityMeal(mealId) {
+    await deleteMeal(mealId);
+    fetchData();
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
 
-  return [cityMeals];
+  return [cityMeals, deleteCityMeal];
 }

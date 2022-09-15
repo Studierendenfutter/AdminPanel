@@ -102,7 +102,6 @@ export default function Stats() {
               name: "emails send",
               data: data
                 ? data.emailsSendDaily.reduce((all, eod) => {
-                    console.log(all, eod);
                     if (xLabels.includes(getDateString(new Date(eod.date))))
                       return all.concat(eod.count);
                     return all;

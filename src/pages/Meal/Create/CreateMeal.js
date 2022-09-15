@@ -13,11 +13,8 @@ export default function CreateMeal() {
     date: getDateString(),
   });
 
-  console.log(meal);
   const createMeal = async () => {
-    console.log(meal);
     const _meal = await postMeal(meal);
-    console.log(_meal);
     history.push("/meals/" + _meal.id);
   };
 
