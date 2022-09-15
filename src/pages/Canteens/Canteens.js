@@ -38,8 +38,8 @@ export default function Canteens() {
             <Button
               onClick={async () => {
                 setIsCrawlingMeals(true);
+                setTimeout(() => setIsCrawlingMeals(false), 2000);
                 await getCanteenCrawlMeals(canteen.id);
-                setIsCrawlingMeals(false);
               }}
               icon="cloud download"
               color="green"
